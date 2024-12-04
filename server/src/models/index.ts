@@ -11,13 +11,13 @@ const Itemized = ItemizedFactory(sequelize);
 const Push = PushFactory(sequelize);
 
 User.hasMany(Push, {
-    onDelete: 'ERROR',
+    onDelete: 'RESTRICT',
 });
 
 Push.belongsTo(User);
 
 AuctionedItem.hasMany(Push, {
-    onDelete: 'ERROR',
+    onDelete: 'RESTRICT',
 });
 
 Push.belongsTo(AuctionedItem);

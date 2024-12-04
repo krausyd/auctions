@@ -31,8 +31,8 @@ export const getAuctionedItemById = async(req: Request, res: Response) => {
 
 export const addAuctiontedItem = async (req: Request, res: Response) => {
     try {
-        const { auctionedItem } = req.body;
-        const newItem = await AuctionedItem.create(auctionedItem);
+        const { auctioned_item } = req.body;
+        const newItem = await AuctionedItem.create(auctioned_item);
         res.status(201).json(newItem);
     } catch(error: any) {
         res.status(500).json({
