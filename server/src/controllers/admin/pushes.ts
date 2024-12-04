@@ -16,7 +16,7 @@ export const getAllPushesForProductId = async(req: Request, res: Response) => {
     try {
         const pushes = Push.findAll({
             where: {
-                product_id: req.params.productId,
+                product_id: req.params.itemId,
             },
         });
         res.status(200).json(pushes);
@@ -27,11 +27,11 @@ export const getAllPushesForProductId = async(req: Request, res: Response) => {
     }
 };
 
-export const getLasPushForProductId = async(req: Request, res: Response) => { 
+export const getLastPushForProductId = async(req: Request, res: Response) => { 
     try {
         const push = Push.findAll({
             where: {
-                product_id: req.params.productId,
+                product_id: req.params.itemId,
             },
             order: [
                 ['createdAt', 'DESC'] 
