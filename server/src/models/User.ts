@@ -5,7 +5,7 @@ import {
     InferCreationAttributes,
     Model,
     Sequelize,
-} from 'sequelize'
+} from 'sequelize';
 import bcrypt from 'bcrypt';
 
 export class User extends Model<
