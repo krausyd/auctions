@@ -26,7 +26,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 100%;
   min-height: 100vh;
 }
 
@@ -65,4 +65,44 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Navbar Content */
+.nav {
+  display: flex;
+  padding: 0;
+}
+
+.nav ul {
+  display: flex;
+  margin-left: auto;
+  flex-direction: row;
+  align-items: end;
+}
+
+.nav-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: larger;
+  font-weight: 900;
+  align-items: end;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-title a {
+  color: #058ed9;
+}
+
+.nav-item {
+  display: block;
+  margin-left: auto;
+  list-style: none;
+  align-items: ;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
 }
