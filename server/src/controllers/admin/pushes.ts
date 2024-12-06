@@ -3,7 +3,7 @@ import { Push } from '../../models/index.js'
 
 export const getAllPushes = async(_req: Request, res: Response) => { 
     try {
-        const pushes = Push.findAll();
+        const pushes = await Push.findAll();
         res.status(200).json(pushes);
     } catch(error: any) {
         res.status(500).json({
@@ -14,7 +14,7 @@ export const getAllPushes = async(_req: Request, res: Response) => {
 
 export const getAllPushesForProductId = async(req: Request, res: Response) => { 
     try {
-        const pushes = Push.findAll({
+        const pushes = await Push.findAll({
             where: {
                 product_id: req.params.itemId,
             },
@@ -29,7 +29,7 @@ export const getAllPushesForProductId = async(req: Request, res: Response) => {
 
 export const getLastPushForProductId = async(req: Request, res: Response) => { 
     try {
-        const push = Push.findAll({
+        const push = await Push.findAll({
             where: {
                 product_id: req.params.itemId,
             },
