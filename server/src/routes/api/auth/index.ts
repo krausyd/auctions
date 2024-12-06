@@ -7,3 +7,5 @@ import {
 
 router.route('/').post(createUser);
 router.route('/logi').post(login);
+
+export default router;

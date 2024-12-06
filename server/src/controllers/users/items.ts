@@ -40,10 +40,8 @@ export const getAuctionedItemById = async(req: Request, res: Response) => {
 export const getLastPriceForAuctionedItem = async(req: Request, res: Response) => {
     try {
         const auctionedItem = await AuctionedItem.findByPk(req.params.itemId);
-        if (auctionedItem) {
-            res.json(auctionedItem)
-        } else {
-            res.status(404).json({
+        if (!auctionedItem) {
+            return res.status(404).json({
                 message: 'Auctioned item not found'
             });
         }
@@ -65,4 +63,47 @@ export const getLastPriceForAuctionedItem = async(req: Request, res: Response) =
             message: error.message
         });
     }
+    return;
+};
+
+export const pushForItem = async(req: Request, res: Response) => {
+    try {
+        const auctionedItem = await AuctionedItem.findByPk(req.params.itemId);
+        if (auctionedItem) {
+            res.json(auctionedItem)
+        } else {
+            return res.status(404).json({
+                message: 'Auctioned item not found'
+            });
+        }
+        const lastPush = await Push.findAll({
+            where: {
+                product_id: req.params.itemId,
+            },
+            attributes: [
+                'amount'
+            ],
+            order: [
+                ['createdAt', 'DESC'] 
+            ],
+            limit: 1
+        });
+        const { amount } = req.body;
+        if (lastPush && lastPush.length > 0 && lastPush[0].amount >= amount) {
+            return res.status(404).json({
+                message: "Someone pushed a bigger amount before you"
+            });
+        }
+        const push = Push.create({
+            product_id: parseInt(req.params.itemId),
+            username: "krausyd",
+            amount: amount
+        });
+        res.status(200).json(push);
+    } catch(error: any) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+    return;
 };
